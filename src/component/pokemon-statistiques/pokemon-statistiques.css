@@ -1,25 +1,27 @@
-tbody {
-    justify-content: center;
-    align-items: center;
-    border: 2px solid;
-    align-content: center;
-    margin-left: 10px;
+.tableau {
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .td {
-    color: purple;
-    font: bold;
+  color: rgb(0, 0, 0);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.td1 {
+  color: rgb(4, 0, 3);
+  font-weight: 700;
 }
 
 .bar-cell {
-    width: 150px;
-    max-width: 90%;
-    padding: 0 10px;
+  width: 160px;
+  padding: 0 10px;
 }
 
 .bar {
-    height: 12px;
-    border-radius: 6px;
-    transition: width 0.3s ease;
-    background-color: gray;
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
