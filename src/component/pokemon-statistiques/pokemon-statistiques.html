@@ -1,0 +1,78 @@
+@if (statistics(); as stats) {
+    <table class="tableau">
+        <tbody>
+            <tr>
+                <td class="td">HP : </td>
+
+                <td class="bar-cell">
+                    <div class="bar" [ngStyle]="{
+                        'width.%': getWidth(stats.hp),
+                        'background-color': getColor(stats.hp)
+                    }"></div>
+                </td>
+
+                <td class="td1">{{stats.hp}}</td>
+            </tr>
+            <tr>
+                <td class="td">ATK : </td>
+
+                <td class="bar-cell">
+                    <div class="bar" [ngStyle]="{
+                        'width.%': getWidth(stats.atk),
+                        'background-color': getColor(stats.atk)
+                    }"></div>
+                </td>
+
+                <td class="td1">{{stats.atk}}</td>
+            </tr>
+            <tr>
+                <td class="td">DEF : </td>
+
+                <td class="bar-cell">
+                    <div class="bar" [ngStyle]="{
+                        'width.%': getWidth(stats.def),
+                        'background-color': getColor(stats.def)
+                    }"></div>
+                </td>
+
+                <td class="td1">{{stats.def}}</td>
+            </tr>
+            <tr>
+                <td class="td">SPE-ATK : </td>
+
+                <td class="bar-cell">
+                    <div class="bar" [ngStyle]="{
+                        'width.%': getWidth(stats.spe_atk),
+                        'background-color': getColor(stats.spe_atk)
+                    }"></div>
+                </td>
+
+                <td class="td1">{{stats.spe_atk}}</td>
+            </tr>
+            <tr>
+                <td class="td">SPE-DEF : </td>
+
+                <td class="bar-cell">
+                    <div class="bar" [ngStyle]="{
+                        'width.%': getWidth(stats.spe_def),
+                        'background-color': getColor(stats.spe_def)
+                    }"></div>
+                </td>
+
+                <td class="td1">{{stats.spe_def}}</td>
+            </tr>
+            <tr>
+                <td class="td">VIT : </td>
+
+                <td class="bar-cell">
+                    <div class="bar" [ngStyle]="{
+                        'width.%': getWidth(stats.vit),
+                        'background-color': getColor(stats.vit)
+                    }"></div>
+                </td>
+
+                <td class="td1">{{stats.vit}}</td>
+            </tr>
+        </tbody>
+    </table>
+}

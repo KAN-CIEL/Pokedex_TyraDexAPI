@@ -1,12 +1,49 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { TyraDexApiService } from '../services/tyradex-api/tyradex-api.service';
+import { Pokemon } from '../services/tyradex-api/pokemon';
+import { PokemonView } from '../component/pokemon-view/pokemon-view';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    ReactiveFormsModule,
+    PokemonView,
+    CommonModule
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('Test_3');
+  protected title = 'tyradex-angular20';
+  private pokemonService = inject(TyraDexApiService);
+  pokemonData: Pokemon | undefined;
+  pokemonNotExist = false;
+  pokemonNotFoundName: string | undefined | null;
+
+  pokemonForm = new FormGroup({
+    pokemonName: new FormControl('')
+  });
+
+  onSubmit() {
+    const pokemonName = this.pokemonForm.value.pokemonName;
+
+    if (pokemonName) {
+      this.pokemonService.getPokemonByName(pokemonName)
+      .subscribe(response => {
+        if (response.status === 404) {
+          console.error(`Pokemon non trouvé : ${pokemonName}`);
+          this.pokemonData = undefined;
+          this.pokemonNotExist = true;
+          this.pokemonNotFoundName = this.pokemonForm.value.pokemonName; 
+          return
+        }
+        this.pokemonData = response;
+        this.pokemonNotExist = false;
+      })
+    }
+  }
 }

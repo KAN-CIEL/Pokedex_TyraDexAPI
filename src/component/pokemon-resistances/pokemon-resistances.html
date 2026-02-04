@@ -1,0 +1,13 @@
+@if (resistances(); as resistances) {
+    <div class="tabRes">
+        <ng-container *ngFor="let resistances of resistances">
+            <img 
+            [style.opacity]="resistances.multiplier > 0 ? resistances.multiplier / 2 : 0.25"
+            [src]="getResistancesImage(resistances.name)"
+            />
+            <div class="multiplier">
+                x {{ resistances.multiplier }}
+            </div>
+        </ng-container>
+    </div>
+}

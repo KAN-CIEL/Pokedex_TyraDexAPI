@@ -1,0 +1,25 @@
+tbody {
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+    align-content: center;
+    margin-left: 10px;
+}
+
+.td {
+    color: purple;
+    font: bold;
+}
+
+.bar-cell {
+    width: 150px;
+    max-width: 90%;
+    padding: 0 10px;
+}
+
+.bar {
+    height: 12px;
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    background-color: gray;
+}

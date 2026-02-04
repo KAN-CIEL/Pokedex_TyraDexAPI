@@ -1,0 +1,8 @@
+@if (types(); as types) {
+    <div class="types">
+        <p class="Types_p">Types</p>
+        <div>
+            <img *ngFor="let type of types" [src]="type.image"/>
+        </div>
+    </div>
+}
