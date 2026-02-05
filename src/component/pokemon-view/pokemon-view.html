@@ -1,64 +1,111 @@
-
 @if (pokemon(); as pokemon) {
     <div class="mainBox">
-        <div class="mainDiv1" *ngIf="pokemon.evolution?.pre !== null">
-            <h2>{{ pokemon.evolution.pre.name }}</h2>
-            <h3>numéro pokedex : {{ pokemon.pokedex_id }}</h3>
-            <h3>Génération : {{ pokemon.generation }}</h3>
-            <app-pokemon-type-information [types]="pokemon.types"></app-pokemon-type-information>
-            <div class="forme">
-                <p>Forme normal</p>
-                <img [src]="pokemon.sprites.regular" />
-                <p>Forme shiny</p>
-                <img [src]="pokemon.sprites.shiny"/>
-            </div>
-        
-            <p *ngIf="pokemon.sprites.gmax?.regular">Forme G-Max</p>
-            <img *ngIf="pokemon.sprites.gmax?.regular" [src]="pokemon.sprites.gmax?.regular"/>
-            <p *ngIf="pokemon.sprites.gmax?.shiny">Forme G-Max</p>
-            <img *ngIf="pokemon.sprites.gmax?.shiny" [src]="pokemon.sprites.gmax?.shiny"/>
-        
-      
-            <div class="Stat">
-                <p>Statistiques</p>
-                <app-pokemon-statistiques [statistics]="pokemon.stats"></app-pokemon-statistiques>
-                <p>Resistances</p>
-                <app-pokemon-resistances [resistances]="pokemon.resistances"></app-pokemon-resistances>
-            </div>
-        </div>
 
+        <!-- ========================= -->
+        <!--   COLONNE GAUCHE (PRE)   -->
+        <!-- ========================= -->
+        <ng-container *ngIf="previousPokemon.length > 0; else emptyLeft">
+            <div class="mainDiv1">
+                <h1 class="evoTitle" *ngFor="let pre of previousPokemon">Evolution précédente :</h1>
+                <div *ngFor="let pre of previousPokemon">
+                    <h2>{{ pre?.name?.fr }}</h2>
+                    <h3>numéro pokedex : {{ pre?.pokedex_id }}</h3>
+                    <h3>Génération : {{ pre?.generation }}</h3>
+                    <h3>{{pokemon.evolution.pre[0].condition}}</h3>
+
+                    <app-pokemon-type-information [types]="pre?.types"></app-pokemon-type-information>
+
+                    <div class="forme">
+                        <p>Forme normal</p>
+                        <img [src]="pre?.sprites?.regular" />
+                        <p>Forme shiny</p>
+                        <img [src]="pre?.sprites?.shiny"/>
+                    </div>
+
+                    <div class="Stat">
+                        <p>Statistiques</p>
+                        <app-pokemon-statistiques [statistics]="pre?.stats"></app-pokemon-statistiques>
+
+                        <p>Resistances</p>
+                        <app-pokemon-resistances [resistances]="pre?.resistances"></app-pokemon-resistances>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-template #emptyLeft>
+            <div class="mainDiv1 empty"></div>
+        </ng-template>
+
+
+        <!-- ========================= -->
+        <!--   COLONNE CENTRALE       -->
+        <!-- ========================= -->
         <div class="mainDiv">
             <h2>{{ pokemon.name.fr }}</h2>
             <h3>numéro pokedex : {{ pokemon.pokedex_id }}</h3>
             <h3>Génération : {{ pokemon.generation }}</h3>
+
             <app-pokemon-type-information [types]="pokemon.types"></app-pokemon-type-information>
+
             <div class="forme">
                 <p>Forme normal</p>
                 <img [src]="pokemon.sprites.regular" />
                 <p>Forme shiny</p>
                 <img [src]="pokemon.sprites.shiny"/>
             </div>
-        
+
             <p *ngIf="pokemon.sprites.gmax?.regular">Forme G-Max</p>
             <img *ngIf="pokemon.sprites.gmax?.regular" [src]="pokemon.sprites.gmax?.regular"/>
+
             <p *ngIf="pokemon.sprites.gmax?.shiny">Forme G-Max</p>
             <img *ngIf="pokemon.sprites.gmax?.shiny" [src]="pokemon.sprites.gmax?.shiny"/>
-        
-      
+
             <div class="Stat">
                 <p>Statistiques</p>
                 <app-pokemon-statistiques [statistics]="pokemon.stats"></app-pokemon-statistiques>
+
                 <p>Resistances</p>
                 <app-pokemon-resistances [resistances]="pokemon.resistances"></app-pokemon-resistances>
             </div>
         </div>
 
-        <div class="mainDiv2" *ngIf="pokemon.evolution?.next !== null">
 
-        </div>
+        <!-- ========================= -->
+        <!--   COLONNE DROITE (NEXT)  -->
+        <!-- ========================= -->
+        <ng-container *ngIf="nextPokemon.length > 0; else emptyRight">
+            <div class="mainDiv2">
+                <h1 class="evoTitle" *ngFor="let next of nextPokemon">Evolution suivante :</h1>
+                <div *ngFor="let next of nextPokemon">
+                    <h2>{{ next?.name?.fr }}</h2>
+                    <h3>numéro pokedex : {{ next?.pokedex_id }}</h3>
+                    <h3>Génération : {{ next?.generation }}</h3>
+                    <h3>{{pokemon.evolution.next[0].condition}}</h3>
+
+                    <app-pokemon-type-information [types]="next?.types"></app-pokemon-type-information>
+
+                    <div class="forme">
+                        <p>Forme normal</p>
+                        <img [src]="next?.sprites?.regular" />
+                        <p>Forme shiny</p>
+                        <img [src]="next?.sprites?.shiny"/>
+                    </div>
+
+                    <div class="Stat">
+                        <p>Statistiques</p>
+                        <app-pokemon-statistiques [statistics]="next?.stats"></app-pokemon-statistiques>
+
+                        <p>Resistances</p>
+                        <app-pokemon-resistances [resistances]="next?.resistances"></app-pokemon-resistances>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-template #emptyRight>
+            <div class="mainDiv2 empty"></div>
+        </ng-template>
+
     </div>
-    
 }
- 
-
-

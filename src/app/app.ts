@@ -29,21 +29,22 @@ export class App {
   });
 
   onSubmit() {
-    const pokemonName = this.pokemonForm.value.pokemonName;
+  const pokemonName = this.pokemonForm.value.pokemonName;
 
-    if (pokemonName) {
-      this.pokemonService.getPokemonByName(pokemonName)
-      .subscribe(response => {
-        if (response.status === 404) {
-          console.error(`Pokemon non trouvé : ${pokemonName}`);
-          this.pokemonData = undefined;
-          this.pokemonNotExist = true;
-          this.pokemonNotFoundName = this.pokemonForm.value.pokemonName; 
-          return
-        }
+  if (!pokemonName) return;
+
+  this.pokemonService.getPokemonByName(pokemonName)
+    .subscribe({
+      next: (response) => {
         this.pokemonData = response;
         this.pokemonNotExist = false;
-      })
-    }
-  }
+      },
+      error: () => {
+        this.pokemonData = undefined;
+        this.pokemonNotExist = true;
+        this.pokemonNotFoundName = pokemonName;
+      }
+    });
+}
+
 }

@@ -4,13 +4,18 @@
   <form class="search-bar" [formGroup]="pokemonForm" (ngSubmit)="onSubmit()">
         <div class="search-container">
             <button type="submit" class="search-icon-btn">🔍</button>
-            <input type="text" formControlName="pokemonName" placeholder="Nom du Pokémon..." class="search-input"/>
+            <input type="search" autocomplete="off" formControlName="pokemonName" placeholder="Nom du Pokémon..." class="search-input"/>
            
         </div>
         
     </form>
     <div *ngIf="pokemonData">
-        <app-pokemon-view [pokemon]="pokemonData"></app-pokemon-view>
+        <app-pokemon-view 
+            *ngIf="pokemonData" 
+            [pokemon]="pokemonData"
+            [attr.key]="pokemonData.pokedex_id">
+        </app-pokemon-view>
+
     </div>
     <div *ngIf="pokemonNotExist">
         <p>Pokemon {{ pokemonForm.value.pokemonName }} non trouvé</p>
