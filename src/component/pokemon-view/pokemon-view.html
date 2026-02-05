@@ -1,19 +1,41 @@
 
 @if (pokemon(); as pokemon) {
-    <div class="mainDiv">
-        <h2>{{ pokemon.name.fr }}</h2>
-        <app-pokemon-type-information [types]="pokemon.types"></app-pokemon-type-information>
-        <p>Forme normal</p>
-        <img [src]="pokemon.sprites.regular" />
-        <p>Forme shiny</p>
-        <img [src]="pokemon.sprites.shiny"/>
-        <div class="Stat">
-            <p>Statistiques</p>
-            <app-pokemon-statistiques [statistics]="pokemon.stats"></app-pokemon-statistiques>
-            <p>Resistances</p>
-            <app-pokemon-resistances [resistances]="pokemon.resistances"></app-pokemon-resistances>
+    <div class="mainBox">
+        <div class="mainDiv1">
+
+        </div>
+
+        <div class="mainDiv">
+            <h2>{{ pokemon.name.fr }}</h2>
+            <h3>numéro pokedex : {{ pokemon.pokedex_id }}</h3>
+            <h3>Génération : {{ pokemon.generation }}</h3>
+            <app-pokemon-type-information [types]="pokemon.types"></app-pokemon-type-information>
+            <div class="forme">
+                <p>Forme normal</p>
+                <img [src]="pokemon.sprites.regular" />
+                <p>Forme shiny</p>
+                <img [src]="pokemon.sprites.shiny"/>
+            </div>
+        
+            <p *ngIf="pokemon.sprites.gmax?.regular">Forme G-Max</p>
+            <img *ngIf="pokemon.sprites.gmax?.regular" [src]="pokemon.sprites.gmax?.regular"/>
+            <p *ngIf="pokemon.sprites.gmax?.shiny">Forme G-Max</p>
+            <img *ngIf="pokemon.sprites.gmax?.shiny" [src]="pokemon.sprites.gmax?.shiny"/>
+        
+      
+            <div class="Stat">
+                <p>Statistiques</p>
+                <app-pokemon-statistiques [statistics]="pokemon.stats"></app-pokemon-statistiques>
+                <p>Resistances</p>
+                <app-pokemon-resistances [resistances]="pokemon.resistances"></app-pokemon-resistances>
+            </div>
+        </div>
+
+        <div class="mainDiv2">
+            
         </div>
     </div>
+    
 }
  
 

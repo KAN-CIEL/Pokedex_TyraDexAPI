@@ -25,3 +25,14 @@
   border: 1px solid rgba(255,255,255,0.4);
   margin: 0 6px;
 }
+
+p {
+  color: rgb(77, 1, 49);
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 3px 10px rgba(245, 245, 245, 0.737);
+  background-color: rgba(56, 2, 63, 0.253);
+  border-radius: 20px;
+  border: solid 2px;
+}
