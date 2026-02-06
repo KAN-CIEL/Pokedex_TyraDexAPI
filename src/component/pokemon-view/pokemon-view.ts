@@ -23,6 +23,9 @@ export class PokemonView {
   previousPokemon: Pokemon[] = [];
   nextPokemon: Pokemon[] = [];
 
+  showEvolutions = false;
+  showGmax = false;
+
   constructor(private api: TyraDexApiService) {
 
     effect(() => {
@@ -32,32 +35,39 @@ export class PokemonView {
       this.previousPokemon = [];
       this.nextPokemon = [];
 
+      this.showEvolutions = false;
+      this.showGmax = false;
+
       // -----------------------------
-      // 🔥 PRÉ‑ÉVOLUTION (1 seule)
+      // 🔥 PRÉ‑ÉVOLUTIONS (TOUTES, DANS LE BON ORDRE)
       // -----------------------------
       if (p.evolution?.pre?.length) {
-        const firstPre = p.evolution.pre[p.evolution.pre.length - 1];
-        if (firstPre?.name?.trim()) {
-          const apiName = this.normalizeName(firstPre.name);
+        this.previousPokemon = new Array(p.evolution.pre.length);
+
+        p.evolution.pre.forEach((pre, index) => {
+          const apiName = this.normalizeName(pre.name);
+
           this.api.getPokemonByName(apiName)
             .subscribe(data => {
-              this.previousPokemon = [data];
+              this.previousPokemon[index] = data; // GARDE LE BON ORDRE
             });
-        }
+        });
       }
 
       // -----------------------------
-      // 🔥 ÉVOLUTION SUIVANTE (1 seule)
+      // 🔥 ÉVOLUTIONS SUIVANTES (TOUTES, DANS LE BON ORDRE)
       // -----------------------------
       if (p.evolution?.next?.length) {
-        const firstNext = p.evolution.next[0];
-        if (firstNext?.name?.trim()) {
-          const apiName = this.normalizeName(firstNext.name);
+        this.nextPokemon = new Array(p.evolution.next.length);
+
+        p.evolution.next.forEach((next, index) => {
+          const apiName = this.normalizeName(next.name);
+
           this.api.getPokemonByName(apiName)
             .subscribe(data => {
-              this.nextPokemon = [data];
+              this.nextPokemon[index] = data; // GARDE LE BON ORDRE
             });
-        }
+        });
       }
     });
   }
@@ -70,5 +80,16 @@ export class PokemonView {
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  // -----------------------------------------
+  // 🔘 Boutons
+  // -----------------------------------------
+  toogleEvolutions() {
+    this.showEvolutions = !this.showEvolutions;
+  }
+
+  toogleGmax() {
+    this.showGmax = !this.showGmax;
   }
 }

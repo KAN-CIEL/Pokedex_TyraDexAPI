@@ -24,6 +24,7 @@ export class App {
   pokemonNotExist = false;
   pokemonNotFoundName: string | undefined | null;
 
+
   pokemonForm = new FormGroup({
     pokemonName: new FormControl('')
   });

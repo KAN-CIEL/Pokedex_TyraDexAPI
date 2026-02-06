@@ -2,43 +2,6 @@
     <div class="mainBox">
 
         <!-- ========================= -->
-        <!--   COLONNE GAUCHE (PRE)   -->
-        <!-- ========================= -->
-        <ng-container *ngIf="previousPokemon.length > 0; else emptyLeft">
-            <div class="mainDiv1">
-                <h1 class="evoTitle" *ngFor="let pre of previousPokemon">Evolution précédente :</h1>
-                <div *ngFor="let pre of previousPokemon">
-                    <h2>{{ pre?.name?.fr }}</h2>
-                    <h3>numéro pokedex : {{ pre?.pokedex_id }}</h3>
-                    <h3>Génération : {{ pre?.generation }}</h3>
-                    <h3>{{pokemon.evolution.pre[0].condition}}</h3>
-
-                    <app-pokemon-type-information [types]="pre?.types"></app-pokemon-type-information>
-
-                    <div class="forme">
-                        <p>Forme normal</p>
-                        <img [src]="pre?.sprites?.regular" />
-                        <p>Forme shiny</p>
-                        <img [src]="pre?.sprites?.shiny"/>
-                    </div>
-
-                    <div class="Stat">
-                        <p>Statistiques</p>
-                        <app-pokemon-statistiques [statistics]="pre?.stats"></app-pokemon-statistiques>
-
-                        <p>Resistances</p>
-                        <app-pokemon-resistances [resistances]="pre?.resistances"></app-pokemon-resistances>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-
-        <ng-template #emptyLeft>
-            <div class="mainDiv1 empty"></div>
-        </ng-template>
-
-
-        <!-- ========================= -->
         <!--   COLONNE CENTRALE       -->
         <!-- ========================= -->
         <div class="mainDiv">
@@ -48,18 +11,87 @@
 
             <app-pokemon-type-information [types]="pokemon.types"></app-pokemon-type-information>
 
+            <app-pokemon-talent-information [talents]="pokemon.talents"></app-pokemon-talent-information>
+
             <div class="forme">
                 <p>Forme normal</p>
                 <img [src]="pokemon.sprites.regular" />
                 <p>Forme shiny</p>
                 <img [src]="pokemon.sprites.shiny"/>
+
+                <!-- ========================= -->
+                <!--   BOUTON EVOLUTIONS       -->
+                <!-- ========================= -->
+                <ng-container *ngIf="pokemon.evolution.pre || pokemon.evolution.next; else emptyLeft">
+                    <div class="EvoButton">
+                        <button class="button" (click)="toogleEvolutions()">
+                            {{ showEvolutions ? 'Masquer évolutions' : 'Afficher évolutions' }}
+                        </button>
+
+                        <div class ="divEvolution" *ngIf="showEvolutions">
+
+                            <!-- ========================= -->
+                            <!--   PRÉ‑ÉVOLUTIONS          -->
+                            <!-- ========================= -->
+                            <div *ngFor="let pre of previousPokemon; let i = index">
+                                <h3>{{ pre.name.fr }}</h3>
+                                <img [src]="pre.sprites.regular"/>
+
+                                <h4>
+                                    Condition d'évolution :
+                                    {{ pokemon.evolution.pre[i].condition }}
+                                </h4>
+
+                                <h4>
+                                    en {{ pokemon.name.fr }}
+                                </h4>
+                            </div>
+
+                            <!-- ========================= -->
+                            <!--   ÉVOLUTIONS SUIVANTES    -->
+                            <!-- ========================= -->
+                            <div *ngFor="let next of nextPokemon; let i = index">
+                                <h3>{{ next.name.fr }}</h3>
+                                <img [src]="next.sprites.regular"/>
+
+                                <h4>
+                                    Condition d'évolution :
+                                    {{ pokemon.evolution.next[i].condition }}
+                                </h4>
+
+                                <h4>
+                                    en {{ next.name.fr }}
+                                </h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-template #emptyLeft>
+                    <div class="EvoButton empty"></div>
+                </ng-template>
+
+                <!-- ========================= -->
+                <!--   BOUTON G-MAX            -->
+                <!-- ========================= -->
+                <ng-container *ngIf="pokemon.sprites.gmax?.regular; else emptyLeft">
+                    <div class="EvoButton">
+                        <button class="button" (click)="toogleGmax()">
+                            {{ showGmax ? 'Masquer Gmax' : 'Afficher Gmax' }}
+                        </button>
+
+                        <div class="divGmax" *ngIf="showGmax">
+                            <p>Forme G-Max</p>
+                            <img [src]="pokemon.sprites.gmax?.regular"/>
+
+                            <p>Forme G-Max shiny</p>
+                            <img [src]="pokemon.sprites.gmax?.shiny"/>
+                        </div>
+                    </div>
+                </ng-container>
+
             </div>
-
-            <p *ngIf="pokemon.sprites.gmax?.regular">Forme G-Max</p>
-            <img *ngIf="pokemon.sprites.gmax?.regular" [src]="pokemon.sprites.gmax?.regular"/>
-
-            <p *ngIf="pokemon.sprites.gmax?.shiny">Forme G-Max</p>
-            <img *ngIf="pokemon.sprites.gmax?.shiny" [src]="pokemon.sprites.gmax?.shiny"/>
 
             <div class="Stat">
                 <p>Statistiques</p>
@@ -69,43 +101,6 @@
                 <app-pokemon-resistances [resistances]="pokemon.resistances"></app-pokemon-resistances>
             </div>
         </div>
-
-
-        <!-- ========================= -->
-        <!--   COLONNE DROITE (NEXT)  -->
-        <!-- ========================= -->
-        <ng-container *ngIf="nextPokemon.length > 0; else emptyRight">
-            <div class="mainDiv2">
-                <h1 class="evoTitle" *ngFor="let next of nextPokemon">Evolution suivante :</h1>
-                <div *ngFor="let next of nextPokemon">
-                    <h2>{{ next?.name?.fr }}</h2>
-                    <h3>numéro pokedex : {{ next?.pokedex_id }}</h3>
-                    <h3>Génération : {{ next?.generation }}</h3>
-                    <h3>{{pokemon.evolution.next[0].condition}}</h3>
-
-                    <app-pokemon-type-information [types]="next?.types"></app-pokemon-type-information>
-
-                    <div class="forme">
-                        <p>Forme normal</p>
-                        <img [src]="next?.sprites?.regular" />
-                        <p>Forme shiny</p>
-                        <img [src]="next?.sprites?.shiny"/>
-                    </div>
-
-                    <div class="Stat">
-                        <p>Statistiques</p>
-                        <app-pokemon-statistiques [statistics]="next?.stats"></app-pokemon-statistiques>
-
-                        <p>Resistances</p>
-                        <app-pokemon-resistances [resistances]="next?.resistances"></app-pokemon-resistances>
-                    </div>
-                </div>
-            </div>
-        </ng-container>
-
-        <ng-template #emptyRight>
-            <div class="mainDiv2 empty"></div>
-        </ng-template>
 
     </div>
 }
