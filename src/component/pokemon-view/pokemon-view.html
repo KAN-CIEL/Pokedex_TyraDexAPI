@@ -22,46 +22,50 @@
                 <!-- ========================= -->
                 <!--   BOUTON EVOLUTIONS       -->
                 <!-- ========================= -->
-                <ng-container *ngIf="pokemon.evolution.pre || pokemon.evolution.next; else emptyLeft">
+                <ng-container *ngIf="pokemon.evolution && (pokemon.evolution.pre || pokemon.evolution.next); else emptyLeft">
                     <div class="EvoButton">
                         <button class="button" (click)="toogleEvolutions()">
                             {{ showEvolutions ? 'Masquer évolutions' : 'Afficher évolutions' }}
                         </button>
 
-                        <div class ="divEvolution" *ngIf="showEvolutions">
+                        <div class="divEvolution" *ngIf="showEvolutions">
 
                             <!-- ========================= -->
                             <!--   PRÉ‑ÉVOLUTIONS          -->
                             <!-- ========================= -->
-                            <div *ngFor="let pre of previousPokemon; let i = index">
-                                <h3>{{ pre.name.fr }}</h3>
-                                <img [src]="pre.sprites.regular"/>
+                            <div *ngIf="pokemon.evolution.pre">
+                                <div *ngFor="let pre of previousPokemon; let i = index">
+                                    <h3>{{ pre.name.fr }}</h3>
+                                    <img [src]="pre.sprites.regular"/>
 
-                                <h4>
-                                    Condition d'évolution :
-                                    {{ pokemon.evolution.pre[i].condition }}
-                                </h4>
+                                    <h4>
+                                        Condition d'évolution :
+                                        {{ pokemon.evolution.pre[i]?.condition }}
+                                    </h4>
 
-                                <h4>
-                                    en {{ pokemon.name.fr }}
-                                </h4>
+                                    <h4>
+                                        en {{ pokemon.name.fr }}
+                                    </h4>
+                                </div>
                             </div>
 
                             <!-- ========================= -->
                             <!--   ÉVOLUTIONS SUIVANTES    -->
                             <!-- ========================= -->
-                            <div *ngFor="let next of nextPokemon; let i = index">
-                                <h3>{{ next.name.fr }}</h3>
-                                <img [src]="next.sprites.regular"/>
+                            <div *ngIf="pokemon.evolution.next">
+                                <div *ngFor="let next of nextPokemon; let i = index">
+                                    <h3>{{ next.name.fr }}</h3>
+                                    <img [src]="next.sprites.regular"/>
 
-                                <h4>
-                                    Condition d'évolution :
-                                    {{ pokemon.evolution.next[i].condition }}
-                                </h4>
+                                    <h4>
+                                        Condition d'évolution :
+                                        {{ pokemon.evolution.next[i]?.condition }}
+                                    </h4>
 
-                                <h4>
-                                    en {{ next.name.fr }}
-                                </h4>
+                                    <h4>
+                                        en {{ next.name.fr }}
+                                    </h4>
+                                </div>
                             </div>
 
                         </div>

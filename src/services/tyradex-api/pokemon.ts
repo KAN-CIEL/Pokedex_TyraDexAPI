@@ -27,5 +27,5 @@ export interface Pokemon extends ErrorPokemonNotFound {
     sexe: PokemonSexe;
     catch_rate: number;
     level_100: number;
-    fromes: Pokemonformes;
+    formes: Pokemonformes;
 }

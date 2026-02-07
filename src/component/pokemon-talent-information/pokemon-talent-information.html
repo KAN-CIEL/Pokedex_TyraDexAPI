@@ -1,1 +1,14 @@
-<p>pokemon-talent-information works!</p>
+@if (talents(); as talents) {
+    <div class="talents">
+        <p class="Talents_p">Talents</p>
+
+        <ng-container *ngFor="let talents of talents">
+            <div class="montalent">
+                <h3>{{ talents.name }}</h3>
+                <h4 *ngIf="talents.tc">(Talent caché)</h4>
+            </div>
+        </ng-container>
+        
+        
+    </div>
+}

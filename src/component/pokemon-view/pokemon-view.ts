@@ -5,6 +5,7 @@ import { PokemonTypeInformation } from '../pokemon-type-information/pokemon-type
 import { PokemonResistancesComp } from '../pokemon-resistances/pokemon-resistances';
 import { CommonModule } from '@angular/common';
 import { TyraDexApiService } from '../../services/tyradex-api/tyradex-api.service';
+import { PokemonTalentInformation } from '../pokemon-talent-information/pokemon-talent-information';
 
 @Component({
   selector: 'app-pokemon-view',
@@ -12,6 +13,7 @@ import { TyraDexApiService } from '../../services/tyradex-api/tyradex-api.servic
     PokemonStatistiques,
     PokemonResistancesComp,
     PokemonTypeInformation,
+    PokemonTalentInformation,
     CommonModule
   ],
   templateUrl: './pokemon-view.html',

@@ -1,0 +1,77 @@
+.talent {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.Talents_p {
+  color: rgb(77, 1, 49);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 6px rgba(255, 255, 255, 0.611);
+}
+
+/* Types en mode badge */
+.types img {
+  width: 55px;
+  padding: 6px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.4);
+  margin: 0 6px;
+}
+
+p {
+  color: rgb(77, 1, 49);
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 3px 10px rgba(245, 245, 245, 0.737);
+  background-color: rgba(56, 2, 63, 0.253);
+  border-radius: 20px;
+  border: solid 2px;
+}
+
+.montalent {
+    background: var(--card-bg);
+    border: 2px solid rgba(70, 1, 55, 0.306);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    flex: 1;
+    max-width: 500px;
+    width: auto;
+    margin-top: 2rem;
+    margin-left: 10px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    margin-top: 2rem;
+}
+
+h3 {
+  color: rgb(77, 1, 49);
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 3px 10px rgba(245, 245, 245, 0.737);
+  background-color: rgba(56, 2, 63, 0.253);
+  border-radius: 20px;
+  border: solid 0px;
+}
+
+h4 {
+  color: rgb(77, 1, 49);
+  font-size: 0.7rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 3px 10px rgba(245, 245, 245, 0.737);
+  background-color: rgba(56, 2, 63, 0.078);
+  border: 0px solid;
+  border-radius: 1rem;
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.079);
+}
